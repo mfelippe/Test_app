@@ -3,6 +3,21 @@ import { Button } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as firebase from "firebase";
+
+const handleSignUp = () => {
+  firebase
+    .auth()
+    .signInAnonymously()
+    .then(() => {
+      alert("Welcome");
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+    });
+};
 
 export default function Index({ navigation }) {
   return (
@@ -10,7 +25,8 @@ export default function Index({ navigation }) {
       <Button
         mode="contained"
         color="#DDD8C4"
-        onPress={() => navigation.navigate("Home")}
+        onPress={handleSignUp}
+        //onPress={() => navigation.navigate("Home")}
       >
         SIGN IN
       </Button>
