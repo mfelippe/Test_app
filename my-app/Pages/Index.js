@@ -3,6 +3,7 @@ import { Button } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { auth } from "../firebase-config";
 import * as firebase from "firebase";
 
 const handleSignUp = () => {
@@ -10,7 +11,18 @@ const handleSignUp = () => {
     .auth()
     .signInAnonymously()
     .then(() => {
-      alert("Welcome");
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          var uid = user.uid;
+          alert(uid);
+          // ...
+        } else {
+          // User is signed out
+          // ...
+        }
+      });
     })
     .catch((error) => {
       var errorCode = error.code;

@@ -9,7 +9,11 @@ function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="index">
-        <Stack.Screen name="index" component={Index} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="index"
+          component={Index}
+        />
         <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
