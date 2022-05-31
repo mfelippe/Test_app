@@ -1,37 +1,40 @@
-import React from "react";
+import Reac, { useState } from "react";
 import { Button } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/core";
+//import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { auth } from "../firebase-config";
 import * as firebase from "firebase";
 
-const handleSignUp = () => {
-  firebase
-    .auth()
-    .signInAnonymously()
-    .then(() => {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          var uid = user.uid;
-          alert(uid);
-          // ...
-        } else {
-          // User is signed out
-          // ...
-        }
-      });
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-    });
-};
+const Index = () => {
+  const navigation = useNavigation();
 
-export default function Index({ navigation }) {
+  const handleSignUp = () => {
+    firebase
+      .auth()
+      .signInAnonymously()
+      .then(() => {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            var uid = user.uid;
+            //alert(uid);
+            navigation.replace("Home");
+            // ...
+          } else {
+            // User is signed out
+            // ...
+          }
+        });
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Button
@@ -44,7 +47,7 @@ export default function Index({ navigation }) {
       </Button>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   //https://coolors.co/ddd8c4-a3c9a8-84b59f-69a297-50808e
@@ -55,3 +58,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default Index;
