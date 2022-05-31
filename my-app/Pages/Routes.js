@@ -14,7 +14,11 @@ function Routes() {
           name="index"
           component={Index}
         />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={Home}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
