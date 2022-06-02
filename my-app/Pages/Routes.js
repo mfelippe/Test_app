@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./Home";
 import Index from "./Index";
-
+import Menu from "./Menu";
 const Stack = createNativeStackNavigator();
 
 function Routes() {
@@ -18,6 +18,11 @@ function Routes() {
           options={{ headerShown: false }}
           name="Home"
           component={Home}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Menu"
+          component={Menu}
         />
       </Stack.Navigator>
     </NavigationContainer>
