@@ -28,7 +28,8 @@ const Index = () => {
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/firebase.User
             //alert("SIGN IN SUCCESS");
-            navigation.replace("Home", { user: user.uid });
+            const email = user.uid;
+            navigation.replace("Home", { user: email });
             // ...
           } else {
             // ...
@@ -59,7 +60,7 @@ const Index = () => {
       .signInWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-        navigation.replace("Home", { user: user.email });
+        navigation.replace("Home", { user: email });
       })
       .catch((error) => alert(error.message));
   };
