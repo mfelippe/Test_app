@@ -8,8 +8,11 @@ import * as firebase from "firebase";
 
 const Index = () => {
   const navigation = useNavigation();
+  const [erroMessage, setErroMessage] = useState();
+  const [erroCode, setErroCode] = useState();
+  const [showErro, setShowErro] = useState(false);
 
-  const handleSignUp = () => {
+  const handleSignUpAnonumously = () => {
     firebase
       .auth()
       .signInAnonymously()
@@ -19,11 +22,10 @@ const Index = () => {
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/firebase.User
             var uid = user.uid;
-            //alert(uid);
-            navigation.replace("Home");
+            //alert("SIGN IN SUCCESS");
+            navigation.replace("Home", { user: user.uid });
             // ...
           } else {
-            // User is signed out
             // ...
           }
         });
@@ -31,6 +33,9 @@ const Index = () => {
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
+        setErroMessage(errorMessage);
+        setErroCode(errorCode);
+        setShowErro(true);
         // ...
       });
   };
@@ -38,13 +43,42 @@ const Index = () => {
   return (
     <View style={styles.container}>
       <Button
+        icon="google-plus"
         mode="contained"
         color="#DDD8C4"
-        onPress={handleSignUp}
+        onPress={handleSignUpAnonumously}
         //onPress={() => navigation.navigate("Home")}
       >
         SIGN IN
       </Button>
+      {showErro ? (
+        <>
+          <View
+            style={{
+              height: "40%",
+              width: "80%",
+              position: "absolute",
+              bottom: 0,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 22 }}>{erroCode}</Text>
+            <Text style={{ color: "#fff", fontSize: 10, marginBottom: 10 }}>
+              {erroMessage}
+            </Text>
+            <Button
+              mode="contained"
+              color="red"
+              onPress={() => setShowErro(false)}
+              //onPress={() => navigation.navigate("Home")}
+            >
+              OK
+            </Button>
+          </View>
+        </>
+      ) : (
+        <></>
+      )}
     </View>
   );
 };
@@ -53,9 +87,9 @@ const styles = StyleSheet.create({
   //https://coolors.co/ddd8c4-a3c9a8-84b59f-69a297-50808e
   container: {
     flex: 1,
-    backgroundColor: "#69A297",
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#69A297",
   },
 });
 
