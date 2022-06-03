@@ -1,4 +1,4 @@
-const menuItems = [
+export const menuItens = [
   {
     id: 1,
     name: "Pizza",
@@ -24,5 +24,3 @@ const menuItems = [
       "https://img.freepik.com/free-photo/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table_2829-19744.jpg?size=626&ext=jpg",
   },
 ];
-
-export default menuItems;

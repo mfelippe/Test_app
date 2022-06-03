@@ -1,8 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import RenderItem from "../components/RenderItem";
 import Home from "./Home";
 import Index from "./Index";
-
+import Menu from "./Menu";
 const Stack = createNativeStackNavigator();
 
 function Routes() {
@@ -18,6 +19,16 @@ function Routes() {
           options={{ headerShown: false }}
           name="Home"
           component={Home}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Menu"
+          component={Menu}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="renderItem"
+          component={RenderItem}
         />
       </Stack.Navigator>
     </NavigationContainer>
